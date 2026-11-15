@@ -54,6 +54,7 @@ python -m zipfile -e data/reports.zip data/reports
 
 1. Agentic RAG
 2. Дополнительный балл за трейсинг RAG и оценку в LangSmith.
+3. Дополнительные приколы, например JEV модель в качестве реранкера.
 
 ## Как оценить решение
 
@@ -84,17 +85,6 @@ answer_correctness = score_answer(gold_answer, answer)["answer_correctness"]
 | `LLM_API_KEY` | LLM-судья `deepseek-flash` через `https://claude.gigaparsers.ru`, функция `score_answer` | Обязательна для оценки ответов. Ключ выдаст преподаватель. |
 | `EMB_KEY` | Эмбеддинги через `https://embeddings.parsers360.ru:10443/embed` | Только если используете этот сервис в своём RAG. Это отдельный ключ сервиса эмбеддингов. |
 | `LANGSMITH_API_KEY` | Эксперименты и трассировка в LangSmith | Для дополнительной части с LangSmith. Создайте ключ в своём аккаунте [LangSmith](https://docs.langchain.com/langsmith/create-account-api-key). |
-
-Для генерации ответов и эмбеддингов в своём RAG настройте ключи выбранных вами сервисов и перечислите их в своём README. Например, `OPENROUTER_API_KEY` нужен, если ваш RAG обращается к OpenRouter; готовому LLM-судье он не нужен. Для локальных моделей API-ключ обычно не требуется. Функция `score_context` работает без ключей.
-
-Перед запуском eval установите `requests` и задайте ключ судьи в переменной окружения:
-
-```bash
-pip install requests
-export LLM_API_KEY="ключ_от_преподавателя"
-```
-
-Примеры eval читают переменные окружения; файл `.env` автоматически не загружается. Если храните ключи в `.env`, загрузите его в своём скрипте, например через `python-dotenv`. Значения ключей в Git не добавляйте; `.env` уже включён в `.gitignore`.
 
 ### Итоговый прогон на test
 
